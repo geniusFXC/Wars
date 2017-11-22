@@ -71,7 +71,6 @@ public class GamePanel : BasePanel {
 
         quitBattleRequest = GetComponent<QuitBattleRequest>();
 
-
         learnSkillBtn.onClick.AddListener(GetRandomSkill);
         skillOneBtn.onClick.AddListener(delegate () { OnLearnSkillClicked(newSkillArr[0].ToString()); });
         skillTwoBtn.onClick.AddListener(delegate () { OnLearnSkillClicked(newSkillArr[1].ToString()); });
@@ -194,7 +193,7 @@ public class GamePanel : BasePanel {
         tempBtn.transform.DOScale(1, 0.5f);
     }
 
-    //弹出随机的三个技能
+    //获得随机的三个技能
     private void GetRandomSkill()
     {
         randomSkillPanel.gameObject.SetActive(true);
