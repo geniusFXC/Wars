@@ -7,7 +7,7 @@ public class RandomSkill : MonoBehaviour
 {
     public List<int> skillArr;//初始所有技能的数组
     public List<int> newSkillArr;//随机出三个技能的新数组
-    public List<string> learnSkillArr = new List<string>();
+    public List<string> learnSkillArr = new List<string>();//已经学习到的技能数组
 
     //随机获得三个技能的按钮
     private Button skillOneBtn;
