@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EatFood : MonoBehaviour {
     private GamePanel gamePanel;
-    private PlayerManager playerMng;
+    private int eatFoodCount = 0;
+    
     void Start()
     {
         gamePanel = GameObject.FindGameObjectWithTag("GamePanel").GetComponent<GamePanel>();
@@ -12,11 +13,14 @@ public class EatFood : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         Destroy(other.gameObject);
-        //gamePanel.GetRandomSkill();
-        playerMng.Eat();
+        //每吃三个食物，得到一个技能
+        //if (++eatFoodCount % 3 == 0)
+        //{
+        //    gamePanel.ShowRandomSkill();
+        //}
+
+
+        gamePanel.ShowRandomSkill();
     }
-    public void SetPlayerManger(PlayerManager playerManager)
-    {
-        this.playerMng = playerManager;
-    }
+    
 }

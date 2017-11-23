@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour {
 
     public float forward = 0;
-
-    private float speed = 3;
+    [HideInInspector]
+    public float speed = 3;
     private Animator anim;
     private ETCJoystick mJoystick;
 	// Use this for initialization
@@ -17,7 +17,7 @@ public class PlayerMove : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Grounded") == false) return;
         //float h = Input.GetAxis("Horizontal");
         //float v = Input.GetAxis("Vertical");

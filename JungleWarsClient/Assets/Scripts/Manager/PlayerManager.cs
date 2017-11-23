@@ -19,9 +19,9 @@ public class PlayerManager : BaseManager
     private ShootRequest shootRequest;
     private AttackRequest attackRequest;
 
-    
 
-    public void UpdateResult(int totalCount,int winCount)
+
+    public void UpdateResult(int totalCount, int winCount)
     {
         userData.TotalCount = totalCount;
         userData.WinCount = winCount;
@@ -39,18 +39,18 @@ public class PlayerManager : BaseManager
     {
         rolePositions = GameObject.Find("RolePositions").transform;
         InitRoleDataDict();
-        
+
     }
     private void InitRoleDataDict()
     {
-        roleDataDict.Add(RoleType.Blue, new RoleData(RoleType.Blue, "Hunter_BLUE", "Arrow_BLUE", "Explosion_BLUE",rolePositions.Find("Position1")));
+        roleDataDict.Add(RoleType.Blue, new RoleData(RoleType.Blue, "Hunter_BLUE", "Arrow_BLUE", "Explosion_BLUE", rolePositions.Find("Position1")));
         roleDataDict.Add(RoleType.Red, new RoleData(RoleType.Red, "Hunter_RED", "Arrow_RED", "Explosion_RED", rolePositions.Find("Position2")));
     }
     public void SpawnRoles()
     {
-        foreach(RoleData rd in roleDataDict.Values)
+        foreach (RoleData rd in roleDataDict.Values)
         {
-            GameObject go= GameObject.Instantiate(rd.RolePrefab, rd.SpawnPosition, Quaternion.identity);
+            GameObject go = GameObject.Instantiate(rd.RolePrefab, rd.SpawnPosition, Quaternion.identity);
             go.tag = "Player";
             if (rd.RoleType == currentRoleType)
             {
@@ -83,15 +83,19 @@ public class PlayerManager : BaseManager
         RoleData rd = GetRoleData(rt);
         playerAttack.arrowPrefab = rd.ArrowPrefab;
         playerAttack.SetPlayerMng(this);
-        eatFood.SetPlayerManger(this);
+        
+
+    }
+    public void MoveSpeedUp()
+    {
 
     }
     public void CreateSyncRequest()
     {
-        playerSyncRequest=new GameObject("PlayerSyncRequest");
+        playerSyncRequest = new GameObject("PlayerSyncRequest");
         playerSyncRequest.AddComponent<MoveRequest>().SetLocalPlayer(currentRoleGameObject.transform, currentRoleGameObject.GetComponent<PlayerMove>())
             .SetRemotePlayer(remoteRoleGameObject.transform);
-        shootRequest=playerSyncRequest.AddComponent<ShootRequest>();
+        shootRequest = playerSyncRequest.AddComponent<ShootRequest>();
         shootRequest.playerMng = this;
         attackRequest = playerSyncRequest.AddComponent<AttackRequest>();
     }
@@ -101,7 +105,7 @@ public class PlayerManager : BaseManager
 
     }
     //射击
-    public void Shoot(GameObject arrowPrefab,Vector3 pos,Quaternion rotation)
+    public void Shoot(GameObject arrowPrefab, Vector3 pos, Quaternion rotation)
     {
         facade.PlayNormalSound(AudioManager.Sound_Timer);
         GameObject.Instantiate(arrowPrefab, pos, rotation).GetComponent<Arrow>().isLocal = true;

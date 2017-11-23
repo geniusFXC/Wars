@@ -13,6 +13,8 @@ public class GamePanel : BasePanel {
     private Button failBtn;
     private Button exitBtn;
     private Canvas easyTouchControlsCanvas;
+    //技能数量
+    public int skillNum;
 
     //随机技能框
     private RectTransform randomSkillPanel;
@@ -31,7 +33,7 @@ public class GamePanel : BasePanel {
 
     public List<int> skillArr;//初始所有技能的数组
     public List<int> newSkillArr;//随机出三个技能的新数组
-    public List<string> learnSkillArr = new List<string>();//已经学习到的技能数组
+    public List<int> learnSkillArr = new List<int>();//已经学习到的技能数组
 
     //已获得技能的等级
     private int skillOneLeve = 0;
@@ -72,9 +74,9 @@ public class GamePanel : BasePanel {
         quitBattleRequest = GetComponent<QuitBattleRequest>();
 
         
-        skillOneBtn.onClick.AddListener(delegate () { OnLearnSkillClicked(newSkillArr[0].ToString()); });
-        skillTwoBtn.onClick.AddListener(delegate () { OnLearnSkillClicked(newSkillArr[1].ToString()); });
-        skillThreeBtn.onClick.AddListener(delegate () { OnLearnSkillClicked(newSkillArr[2].ToString()); });
+        skillOneBtn.onClick.AddListener(delegate () { OnLearnSkillClicked(newSkillArr[0]); });
+        skillTwoBtn.onClick.AddListener(delegate () { OnLearnSkillClicked(newSkillArr[1]); });
+        skillThreeBtn.onClick.AddListener(delegate () { OnLearnSkillClicked(newSkillArr[2]); });
 
         Debug.Log("初始化完毕");
     }
@@ -114,7 +116,7 @@ public class GamePanel : BasePanel {
         
     }
     //学习其中一个技能
-    private void OnLearnSkillClicked(string skillName)
+    private void OnLearnSkillClicked(int skillName)
     {
         int temp = 0;
 
@@ -139,15 +141,16 @@ public class GamePanel : BasePanel {
         {
             case 1:
                 skillOneLeve += 1;
-                learnSkillOneText.text = skillName + GetUltimateSkill(skillOneLeve);
+                learnSkillOneText.text = (SkillType)skillName + GetUltimateSkill(skillOneLeve);
+
                 break;
             case 2:
                 skillTwoLeve += 1;
-                learnSkillTwoText.text = skillName + GetUltimateSkill(skillTwoLeve);
+                learnSkillTwoText.text = (SkillType)skillName + GetUltimateSkill(skillTwoLeve);
                 break;
             case 3:
                 skillThreeLeve += 1;
-                learnSkillThreeText.text = skillName + GetUltimateSkill(skillThreeLeve);
+                learnSkillThreeText.text = (SkillType)skillName + GetUltimateSkill(skillThreeLeve);
                 break;
         }
         randomSkillPanel.gameObject.SetActive(false);
@@ -194,7 +197,7 @@ public class GamePanel : BasePanel {
     }
 
     //获得随机的三个技能
-    public void GetRandomSkill()
+    public void ShowRandomSkill()
     {
         randomSkillPanel.gameObject.SetActive(true);
         RandomThreeSkill();
