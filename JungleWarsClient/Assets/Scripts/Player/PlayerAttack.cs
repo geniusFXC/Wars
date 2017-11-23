@@ -12,9 +12,9 @@ public class PlayerAttack : MonoBehaviour
     private Animator anim;
     private Transform leftHandTrans;
     private Vector3 shootDir;
-    private Vector3 lastShootDir;
+    //private Vector3 lastShootDir;
     private PlayerManager playerMng;
-    private EventSystem eventSystem;
+    //private EventSystem eventSystem;
     private ETCButton attackBtn;
     private ETCJoystick mJoystick;
 

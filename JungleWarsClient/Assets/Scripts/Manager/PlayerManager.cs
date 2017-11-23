@@ -78,9 +78,13 @@ public class PlayerManager : BaseManager
         currentRoleGameObject.AddComponent<PlayerMove>();
         PlayerAttack playerAttack = currentRoleGameObject.AddComponent<PlayerAttack>();
         RoleType rt = currentRoleGameObject.GetComponent<PlayerInfo>().roleType;
+        //挂载吃食物脚本
+        EatFood eatFood = currentRoleGameObject.AddComponent<EatFood>();
         RoleData rd = GetRoleData(rt);
         playerAttack.arrowPrefab = rd.ArrowPrefab;
         playerAttack.SetPlayerMng(this);
+        eatFood.SetPlayerManger(this);
+
     }
     public void CreateSyncRequest()
     {
@@ -91,6 +95,12 @@ public class PlayerManager : BaseManager
         shootRequest.playerMng = this;
         attackRequest = playerSyncRequest.AddComponent<AttackRequest>();
     }
+    //吃食物
+    public void Eat()
+    {
+
+    }
+    //射击
     public void Shoot(GameObject arrowPrefab,Vector3 pos,Quaternion rotation)
     {
         facade.PlayNormalSound(AudioManager.Sound_Timer);

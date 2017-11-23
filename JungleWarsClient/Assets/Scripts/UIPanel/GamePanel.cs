@@ -63,15 +63,15 @@ public class GamePanel : BasePanel {
         randomSkillPanel = transform.Find("RandomSkillPanel").GetComponent<RectTransform>();
         randomSkillPanel.gameObject.SetActive(false);
         //测试用的模拟升级获取技能
-        learnSkillBtn = transform.Find("GetSkillBtn").GetComponent<Button>();
-
+        //learnSkillBtn = transform.Find("GetSkillBtn").GetComponent<Button>();
+        //learnSkillBtn.onClick.AddListener(GetRandomSkill);
         learnSkillOneText = transform.Find("FirstLearnText").GetComponent<Text>();
         learnSkillTwoText = transform.Find("SecondLearnText").GetComponent<Text>();
         learnSkillThreeText = transform.Find("ThirdLearnText").GetComponent<Text>();
 
         quitBattleRequest = GetComponent<QuitBattleRequest>();
 
-        learnSkillBtn.onClick.AddListener(GetRandomSkill);
+        
         skillOneBtn.onClick.AddListener(delegate () { OnLearnSkillClicked(newSkillArr[0].ToString()); });
         skillTwoBtn.onClick.AddListener(delegate () { OnLearnSkillClicked(newSkillArr[1].ToString()); });
         skillThreeBtn.onClick.AddListener(delegate () { OnLearnSkillClicked(newSkillArr[2].ToString()); });
@@ -194,7 +194,7 @@ public class GamePanel : BasePanel {
     }
 
     //获得随机的三个技能
-    private void GetRandomSkill()
+    public void GetRandomSkill()
     {
         randomSkillPanel.gameObject.SetActive(true);
         RandomThreeSkill();
